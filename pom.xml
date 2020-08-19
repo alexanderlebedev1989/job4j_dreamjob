@@ -6,9 +6,6 @@
   <groupId>ru.job4j</groupId>
   <artifactId>job4j_dreamjob</artifactId>
   <version>1.0</version>
-  <modules>
-    <module>chapter_001</module>
-  </modules>
   <packaging>pom</packaging>
 
   <name>job4j_dreamjob Maven Webapp</name>
