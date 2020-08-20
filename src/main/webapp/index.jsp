@@ -1,6 +1,5 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.model.Post" %>
-<%@ page import="ru.job4j.store.Store" %>
 <!doctype html>
 <html lang="en">
 <head>
