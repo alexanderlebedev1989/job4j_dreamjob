@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
+
     private static final Store INST = new Store();
     private final static AtomicInteger POST_ID = new AtomicInteger(4);
     private final static AtomicInteger CANDIDATE_ID = new AtomicInteger(1);

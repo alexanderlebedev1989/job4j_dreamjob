@@ -4,6 +4,7 @@
 <%@ page import="ru.job4j.store.Store" %>
 <%@ page import="ru.job4j.model.Candidate" %>
 <%@ page import="java.util.Collection" %>
+
 <!doctype html>
 <html lang="en">
 <head>
