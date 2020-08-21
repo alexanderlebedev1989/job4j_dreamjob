@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.model.Post" %>
-<%@ page import="ru.job4j.store.Store" %>
+<%@ page import="ru.job4j.store.MemStore" %>
 
 
 <!doctype html>
@@ -27,7 +27,7 @@
     String id = request.getParameter("id");
     Post post = new Post(0, "");
     if (id != null) {
-        post = Store.instOf().findByIdPost(Integer.valueOf(id));
+        post = MemStore.instOf().findByIdPost(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">
