@@ -1,6 +1,4 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.model.Post" %>
 <%@ page import="ru.job4j.store.Store" %>
 <%@ page import="ru.job4j.model.Candidate" %>
 <%@ page import="java.util.Collection" %>
@@ -41,16 +39,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${candidates}" var="candidate">
-                        <tr>
-                            <td>
-                                <a href='<c:url value="/candidate/edit.jsp?id=${candidate.id}"/>'>
-                                    <i class="fa fa-edit mr-3"></i>
-                                </a>
-                                <c:out value="${candidate.name}"/>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                    <% for (Candidate candidate : (Collection<Candidate>) request.getAttribute("candidates")) { %>
+                    <tr>
+                        <td> <a href="<%=request.getContextPath()%>/candidate/edit.jsp?id=<%=candidate.getId()%>">
+                            <i class="fa fa-edit mr-3"></i>
+                        </a>
+                            <%=candidate.getName()%></td>
+                        </td>
+                    </tr>
+                    <% } %>
                     </tbody>
                 </table>
             </div>
