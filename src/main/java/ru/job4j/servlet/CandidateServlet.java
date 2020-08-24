@@ -1,8 +1,6 @@
 package ru.job4j.servlet;
-
 import ru.job4j.model.Candidate;
 import ru.job4j.store.MemStore;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +14,7 @@ public class CandidateServlet extends HttpServlet {
         req.setAttribute("candidates", MemStore.instOf().findAllCandidates());
         req.getRequestDispatcher("candidates.jsp").forward(req, resp);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
