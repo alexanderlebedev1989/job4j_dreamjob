@@ -15,11 +15,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>14</maven.compiler.source>
     <maven.compiler.target>14</maven.compiler.target>
-    <db.url>jdbc:postgresql://127.0.0.1:5432/dreamjob</db.url>
-    <db.driver>org.postgresql.Driver</db.driver>
-    <db.username>postgres</db.username>
-    <db.password>password</db.password>
   </properties>
+
+
 
   <dependencies>
     <dependency>
@@ -115,4 +113,19 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>test</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>
+        <db.username>postgres</db.username>
+        <db.password>password</db.password>
+        <db.driver>org.postgresql.Driver</db.driver>
+      </properties>
+    </profile>
+  </profiles>
 </project>
