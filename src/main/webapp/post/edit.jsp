@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.model.Post" %>
 <%@ page import="ru.job4j.store.PsqlStore" %>
-
 <!doctype html>
 <html lang="en">
 <head>
