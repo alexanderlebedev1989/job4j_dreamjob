@@ -17,8 +17,6 @@
     <maven.compiler.target>14</maven.compiler.target>
   </properties>
 
-
-
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>
