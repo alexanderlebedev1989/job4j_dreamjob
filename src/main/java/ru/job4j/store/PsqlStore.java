@@ -26,6 +26,7 @@ public class PsqlStore implements Store {
         )) {
             cfg.load(io);
         } catch (Exception e) {
+            System.out.println(System.getProperty("user.dir"));
             throw new IllegalStateException(e);
         }
         try {

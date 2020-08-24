@@ -15,8 +15,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>14</maven.compiler.source>
     <maven.compiler.target>14</maven.compiler.target>
+    <db.url>jdbc:postgresql://127.0.0.1:5432/dreamjob</db.url>
+    <db.driver>org.postgresql.Driver</db.driver>
+    <db.username>postgres</db.username>
+    <db.password>password</db.password>
   </properties>
-
 
   <dependencies>
     <dependency>
@@ -86,6 +89,26 @@
             <phase>test</phase>
             <goals>
               <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>3.6.2</version>
+        <configuration>
+          <changeLogFile>${basedir}/db/master.xml</changeLogFile>
+          <url>${db.url}</url>
+          <driver>${db.driver}</driver>
+          <username>${db.username}</username>
+          <password>${db.password}</password>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>update</goal>
             </goals>
           </execution>
         </executions>
