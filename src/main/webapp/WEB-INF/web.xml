@@ -8,6 +8,7 @@
     <servlet-name>PostServlet</servlet-name>
     <servlet-class>ru.job4j.servlet.PostServlet</servlet-class>
   </servlet>
+
   <servlet>
     <servlet-name>CandidateServlet</servlet-name>
     <servlet-class>ru.job4j.servlet.CandidateServlet</servlet-class>
@@ -16,6 +17,16 @@
   <servlet>
     <servlet-name>IndexServlet</servlet-name>
     <servlet-class>ru.job4j.servlet.IndexServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>ru.job4j.servlet.UploadServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DownloadServlet</servlet-name>
+    <servlet-class>ru.job4j.servlet.DownloadServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -32,5 +43,25 @@
     <servlet-name>IndexServlet</servlet-name>
     <url-pattern>/index.do</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/download</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteCandidateServlet</servlet-name>
+    <servlet-class>ru.job4j.servlet.DeleteCandidate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCandidateServlet</servlet-name>
+    <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+
 </web-app>
 

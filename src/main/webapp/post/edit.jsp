@@ -31,9 +31,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новая вакансия.
+                Новая вакансия
                 <% } else { %>
-                Редактирование вакансии.
+                Редактирование вакансии
                 <% } %>
             </div>
             <div class="card-body">

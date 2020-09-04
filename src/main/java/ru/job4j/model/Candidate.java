@@ -6,10 +6,12 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
+    private String photo;
 
-    public Candidate(int id, String name) {
+    public Candidate(int id, String name, String photo) {
         this.id = id;
         this.name = name;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -28,6 +30,14 @@ public class Candidate {
         this.name = name;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -39,6 +49,7 @@ public class Candidate {
         Candidate candidate = (Candidate) o;
         return id == candidate.id
                 && Objects.equals(name, candidate.name);
+
     }
 
     @Override

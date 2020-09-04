@@ -1,12 +1,11 @@
-DROP TABLE IF EXISTS post;
-DROP TABLE IF EXISTS candidate;
-
-CREATE TABLE post (
+CREATE TABLE IF NOT EXISTS post (
    id SERIAL PRIMARY KEY,
    name TEXT
 );
 
-CREATE TABLE candidate (
+CREATE TABLE IF NOT EXISTS candidate (
    id SERIAL PRIMARY KEY,
-   name TEXT
+   name VARCHAR (200),
+   photo VARCHAR(200)
 );
+
