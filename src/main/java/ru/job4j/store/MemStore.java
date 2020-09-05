@@ -2,6 +2,8 @@ package ru.job4j.store;
 
 import ru.job4j.model.Candidate;
 import ru.job4j.model.Post;
+import ru.job4j.model.User;
+
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -54,5 +56,20 @@ public class MemStore implements Store {
     @Override
     public Post findByIdPost(int id) {
         return posts.get(id);
+    }
+
+    @Override
+    public Collection<User> findAllUsers() {
+        return null;
+    }
+
+    @Override
+    public void saveUser(User user) {
+
+    }
+
+    @Override
+    public User findByUser(int id) {
+        return null;
     }
 }

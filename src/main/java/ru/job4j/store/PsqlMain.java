@@ -1,13 +1,12 @@
 package ru.job4j.store;
-
-import ru.job4j.model.Post;
+import ru.job4j.model.User;
 
 public class PsqlMain {
     public static void main(String[] args) {
         Store store = PsqlStore.instOf();
-        store.savePost(new Post(0, "Java Job"));
-        for (Post post : store.findAllPosts()) {
-            System.out.println(post.getId() + " " + post.getName());
+        store.saveUser(new User("Admin", "q@mail.ru", "root"));
+        for (User user : store.findAllUsers()) {
+            System.out.println(user.getId() + " " + user.getName() + " " + user.getEmail() + " " + user.getPassword());
         }
     }
 }
