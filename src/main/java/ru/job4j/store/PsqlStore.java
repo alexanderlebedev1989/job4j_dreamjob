@@ -3,6 +3,8 @@ package ru.job4j.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.model.Candidate;
 import ru.job4j.model.Post;
+import ru.job4j.model.User;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
@@ -64,25 +66,6 @@ public class PsqlStore implements Store {
         return posts;
     }
 
-    @Override
-    public Collection<Candidate> findAllCandidates() {
-        List<Candidate> candidates = new ArrayList<>();
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate")
-        ) {
-            try (ResultSet it = ps.executeQuery()) {
-                while (it.next()) {
-                    candidates.add(new Candidate(
-                            it.getInt("id"),
-                            it.getString("name")
-                    ));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return candidates;
-    }
 
     @Override
     public void savePost(Post post) {
@@ -93,12 +76,31 @@ public class PsqlStore implements Store {
         }
     }
 
-    @Override
-    public void saveCandidate(Candidate candidate) {
-        if (candidate.getId() == 0) {
-            createCandidate(candidate);
-        } else {
-            updateCandidate(candidate);
+    private Post createPost(Post post) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO post (name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, post.getName());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    post.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return post;
+    }
+
+    private void updatePost(Post post) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("UPDATE post SET name = ? WHERE id = ?")) {
+            ps.setString(1, post.getName());
+            ps.setInt(2, post.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -119,6 +121,35 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public void saveCandidate(Candidate candidate) {
+        if (candidate.getId() == 0) {
+            createCandidate(candidate);
+        } else {
+            updateCandidate(candidate);
+        }
+    }
+    @Override
+    public Collection<Candidate> findAllCandidates() {
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    candidates.add(new Candidate(
+                            it.getInt("id"),
+                            it.getString("name")
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidates;
+    }
+
+
+    @Override
     public Candidate findByIdCandidate(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement st = cn.prepareStatement("SELECT name FROM candidate WHERE id = ?")) {
@@ -136,22 +167,7 @@ public class PsqlStore implements Store {
         return null;
     }
 
-    private Post createPost(Post post) {
-        try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO post (name) VALUES (?)",
-                     PreparedStatement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, post.getName());
-            ps.execute();
-            try (ResultSet id = ps.getGeneratedKeys()) {
-                if (id.next()) {
-                    post.setId(id.getInt(1));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return post;
-    }
+
 
     private Candidate createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
@@ -170,22 +186,97 @@ public class PsqlStore implements Store {
         return candidate;
     }
 
-    private void updatePost(Post post) {
+
+
+    private void updateCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("UPDATE post SET name = ? WHERE id = ?")) {
-            ps.setString(1, post.getName());
-            ps.setInt(2, post.getId());
+             PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name = ? WHERE id = ?")) {
+            ps.setString(1, candidate.getName());
+            ps.setInt(2, candidate.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void updateCandidate(Candidate candidate) {
+    @Override
+    public Collection<User> findAllUsers() {
+        List<User> users = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name = ? WHERE id = ?")) {
-            ps.setString(1, candidate.getName());
-            ps.setInt(3, candidate.getId());
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users")) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setName(rs.getString("name"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    users.add(user);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public void saveUser(User user) {
+        if (user.getId() == 0) {
+            createUser(user);
+        } else {
+            updateUser(user);
+        }
+    }
+
+    @Override
+    public User findByUser(int id) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM users WHERE id = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setId(id);
+                    user.setEmail(rs.getString("name"));
+                    user.setEmail(rs.getString("email"));
+                    user.setPassword(rs.getString("password"));
+                    return user;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private User createUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, email, password) VALUES (?, ?, ?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.executeUpdate();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    user.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    private void updateUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("UPDATE candidate SET name = ?, email = ?, password = ?"
+                     + " WHERE id = ?")) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

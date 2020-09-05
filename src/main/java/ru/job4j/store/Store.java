@@ -2,6 +2,7 @@ package ru.job4j.store;
 
 import ru.job4j.model.Candidate;
 import ru.job4j.model.Post;
+import ru.job4j.model.User;
 
 import java.util.Collection;
 
@@ -14,5 +15,9 @@ public interface Store {
     void savePost(Post post);
     Collection<Post> findAllPosts();
     Post findByIdPost(int id);
+
+    Collection<User> findAllUsers();
+    void saveUser(User user);
+    User findByUser(int id);
 
 }
