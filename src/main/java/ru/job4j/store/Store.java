@@ -19,5 +19,6 @@ public interface Store {
     Collection<User> findAllUsers();
     void saveUser(User user);
     User findByUser(int id);
+    User findByEmailAndPassword(String email, String password);
 
 }

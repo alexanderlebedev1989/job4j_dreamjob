@@ -72,4 +72,9 @@ public class MemStore implements Store {
     public User findByUser(int id) {
         return null;
     }
+
+    @Override
+    public User findByEmailAndPassword(String email, String password) {
+        return null;
+    }
 }
