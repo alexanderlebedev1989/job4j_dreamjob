@@ -1,4 +1,5 @@
 package ru.job4j.servlet;
+
 import ru.job4j.model.Post;
 import ru.job4j.store.PsqlStore;
 import javax.servlet.ServletException;

@@ -8,10 +8,10 @@ public class Candidate {
     private String name;
     private String photo;
 
-    public Candidate(int id, String name, String photo) {
+    public Candidate(int id, String name) {
         this.id = id;
         this.name = name;
-        this.photo = photo;
+
     }
 
     public int getId() {
