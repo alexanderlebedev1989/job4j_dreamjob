@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <form class="container-fluid">
+            <div class="form-group">
+                <label for="fn">FirstName:</label>
+                <input type="text" class="form-control" id="fn" name="firstName">
+            </div>
+            <div class="form-group">
+                <label for="sn">SecondName:</label>
+                <input type="text" class="form-control" id="sn" name="secondName">
+            </div>
+            <div class="form-group">1. index.html + bootstrap, form, table [#336632]
+                <label for="male">Male:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="female">Female:</label>
+                <input type="radio" id="female" name="gender" value="female">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label><br>
+                <textarea name="description" id="description" rows="4" col="50"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>SecondName</th>
+                <th>Gender</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
