@@ -5,7 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script>
+    function validate() {
+        let firstName = $('#fn').val();
+        let secondName = $('#sn').val();
+        let gender = $('#gender-control').val();
+        let description = $('#description').val();
+        if (firstName === "" || secondName === "" || gender === "" || description === "") {
+            alert("Please fill in all fields");
+        }
+    }
+</script>
 </head>
 <body>
 <div class="container">
@@ -20,17 +33,15 @@
                 <input type="text" class="form-control" id="sn" name="secondName">
             </div>
             <div class="form-group">
-                <label for="male">Male:</label>
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="female">Female:</label>
-                <input type="radio" id="female" name="gender" value="female">
+                <label class="form-check-label" for="gender-control">Select gender:</label>
+                <input id = "gender-control" class="form-control" type="text" name="gender">
             </div>
             <div class="form-group">
                 <label for="description">Description:</label><br>
                 <textarea name="description" id="description" rows="4" col="50"></textarea>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button  type="submit" onclick="return validate();" class="btn btn-default">Submit</button>
             </div>
         </form>
     </div>
@@ -55,8 +66,5 @@
         </table>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
